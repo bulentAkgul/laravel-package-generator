@@ -1,0 +1,15 @@
+@extends("{{ extend }}")
+
+@section("app-content")
+
+@yield("page-content")
+
+@endsection
+
+@push("app-scripts")
+    <script src="{{ asset('js/{{ app }}.js') }}" defer></script>
+@endpush
+
+@push("app-styles")
+    <link rel="stylesheet" href="{{ asset('css/{{ app }}.css') }}">
+@endpush

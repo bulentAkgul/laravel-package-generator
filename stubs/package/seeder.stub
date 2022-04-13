@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Seeder;
+
+class PackageSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $this->run(array_map(fn ($seeder) => $seeder::class, config('{{ registrar }}.seeders')));
+    }
+}

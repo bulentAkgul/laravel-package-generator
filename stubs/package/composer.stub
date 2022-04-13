@@ -1,0 +1,29 @@
+{
+  "name": "{{ vendor }}/{{ package }}",
+  "description": "...",
+  "authors": [
+    {
+      "name": "{{ name }}",
+      "email": "{{ email }}"
+    }
+  ],
+  "require": {},
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "{{ composer_namespace }}\\": "src/"
+    }
+  },
+  "autoload-dev": {
+      "psr-4": {
+          "{{ composer_namespace }}\\Tests\\": "tests/"
+      }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "{{ composer_namespace }}\\{{ Package }}ServiceProvider"
+      ]
+    }
+  }
+}

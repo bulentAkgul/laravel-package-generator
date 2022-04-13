@@ -1,0 +1,4 @@
+@extends("{{ extends }}")
+@section("page-content")
+@yield("page-section")
+@endsection

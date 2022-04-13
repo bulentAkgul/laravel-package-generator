@@ -1,0 +1,28 @@
+{
+  "name": "bakgul/laravel-package-generator",
+  "description": "A package to create packages.",
+  "authors": [
+    {
+      "name": "Bulent Akgul",
+      "email": "bulent.akgul@me.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "bakgul/kernel": "@dev",
+    "bakgul/command-evaluator": "@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bakgul\\PackageGenerator\\": "src/",
+      "Bakgul\\PackageGenerator\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Bakgul\\PackageGenerator\\PackagifierServiceProvider"
+      ]
+    }
+  }
+}
