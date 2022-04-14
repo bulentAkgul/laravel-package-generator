@@ -3,10 +3,8 @@
 namespace Bakgul\PackageGenerator\Tasks;
 
 use Bakgul\Kernel\Helpers\Arry;
-use Bakgul\Kernel\Helpers\Path;
-use Bakgul\Kernel\Helpers\Requirement;
+use Bakgul\Kernel\Helpers\Prevented;
 use Bakgul\Kernel\Helpers\Settings;
-use Bakgul\Kernel\Helpers\Text;
 use Bakgul\PackageGenerator\Functions\ExtendRequest;
 use Bakgul\PackageGenerator\Functions\GetRequestService;
 
@@ -23,8 +21,8 @@ class GetJsRequest
 
     private function isNotRequired($app, $option): bool
     {
-        if ($option == 'route') return !Requirement::route($app['router']);
-        if ($option == 'store') return !Requirement::store($app['type']);
+        if ($option == 'route') return Prevented::route($app['router']);
+        if ($option == 'store') return Prevented::store($app['type']);
 
         return true;
     }
