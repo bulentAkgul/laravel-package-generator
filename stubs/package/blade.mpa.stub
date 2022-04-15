@@ -3,7 +3,7 @@
 @section("app-content")
 
 @yield("page-content")
-
+{{ lw_scripts }}
 @endsection
 
 @push("app-scripts")
@@ -12,4 +12,5 @@
 
 @push("app-styles")
     <link rel="stylesheet" href="{{ asset('css/{{ app }}.css') }}">
+    {{ lw_styles }}
 @endpush
