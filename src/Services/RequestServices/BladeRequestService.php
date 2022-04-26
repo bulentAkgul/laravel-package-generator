@@ -11,7 +11,7 @@ class BladeRequestService extends RequestService
     {
         $request['attr']['path'] = $this->makePath($request);
         $request['attr']['file'] = "page.blade.php";
-        $request['attr']['stub'] = "blade.bridge.stub";
+        $request['attr']['stub'] = "blade.stub";
 
         $request['map']['extends'] = Settings::standalone('package') ? '' : "layouts.{$request['attr']['folder']}";
 
