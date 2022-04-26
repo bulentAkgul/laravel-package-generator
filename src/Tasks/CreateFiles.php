@@ -21,7 +21,7 @@ class CreateFiles
         self::$request = $request;
         self::$requestService = new RequestService;
 
-        self::create($structure, base_path('resources'));
+        self::create($structure, $request['attr']['path']);
     }
     
     public static function create($structure, $path)
