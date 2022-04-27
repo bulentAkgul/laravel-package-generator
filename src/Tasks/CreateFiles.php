@@ -3,7 +3,7 @@
 namespace Bakgul\PackageGenerator\Tasks;
 
 use Bakgul\FileContent\Functions\MakeFile;
-use Bakgul\FileContent\Tasks\CompleteFolders;
+use Bakgul\Kernel\Tasks\CompleteFolders;
 use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;

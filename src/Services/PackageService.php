@@ -2,7 +2,7 @@
 
 namespace Bakgul\PackageGenerator\Services;
 
-use Bakgul\FileContent\Tasks\CompleteFolders;
+use Bakgul\Kernel\Tasks\CompleteFolders;
 use Bakgul\PackageGenerator\Tasks\BuildPackageStructure;
 use Bakgul\PackageGenerator\Tasks\RegisterToComposer;
 
