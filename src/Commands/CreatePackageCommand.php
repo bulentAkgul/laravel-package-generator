@@ -7,6 +7,7 @@ use Bakgul\Kernel\Concerns\HasRequest;
 use Bakgul\Kernel\Concerns\Sharable;
 use Bakgul\Evaluator\Concerns\ShouldBeEvaluated;
 use Bakgul\Evaluator\Services\PackageCommandEvaluationService;
+use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\PackageGenerator\Services\PackageService;
 use Illuminate\Console\Command;
 
@@ -28,9 +29,10 @@ class CreatePackageCommand extends Command
     {
         $this->prepareRequest();
 
-        $this->evaluate();
-
-        if ($this->stop()) return $this->terminate();
+        if (Settings::evaluator('evaluate_commands')) {
+            $this->evaluate();
+            if ($this->stop()) return $this->terminate();
+        }
 
         (new PackageService)->handle($this->makePackageRequest());
     }
