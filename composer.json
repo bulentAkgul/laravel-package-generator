@@ -1,6 +1,6 @@
 {
   "name": "bakgul/laravel-package-generator",
-  "description": "A package to create packages.",
+  "description": "Create standalone packages or packages as a part of Laravel repository.",
   "authors": [
     {
       "name": "Bulent Akgul",
