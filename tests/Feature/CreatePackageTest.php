@@ -30,9 +30,9 @@ class CreatePackageTest extends TestCase
     public function package_will_be_created_on_the_base_when_standalone_package_is_true()
     {
         $this->testPackage = (new SetupTest)(TestDataService::standalone('sp'));
-
-        config()->set('packagify.identity.package', 'my test package');
-        config()->set('packagify.identity.registrar', 'register-with-me');
+        
+        Settings::set('identity.package', 'my test package');
+        Settings::set('identity.registrar', 'register-with-me');
 
         Folder::refresh(base_path(Settings::main('package_root')));
 

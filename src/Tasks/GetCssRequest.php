@@ -13,7 +13,7 @@ class GetCssRequest
     {
         return Prevented::css()
             ? null
-            : GetRequestService::_(__NAMESPACE__, Settings::resourceOptions('css'))?->handle(
+            : GetRequestService::_(__NAMESPACE__, Settings::main('css'))?->handle(
                 ExtendRequest::_($request, $app, 'css')
             );
     }

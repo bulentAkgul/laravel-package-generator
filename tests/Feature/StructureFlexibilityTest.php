@@ -11,7 +11,7 @@ class StructureFlexibilityTest extends TestCase
     /** @test */
     public function when_new_folder_added_to_structure_it_will_be_created()
     {
-        config()->set('packagify.structures.package.src.Models', []);
+        Settings::set('structures.package.src.Models', []);
 
         $this->artisan('create:package users core');
 
@@ -21,7 +21,7 @@ class StructureFlexibilityTest extends TestCase
     /** @test */
     public function when_new_deeply_nested_folder_added_to_structure_it_will_be_created()
     {
-        config()->set('packagify.structures.package.src.Models', ['Sub1' => ['Sub2' => ['Sub3' => ['Folders' => []]]]]);
+        Settings::set('structures.package.src.Models', ['Sub1' => ['Sub2' => ['Sub3' => ['Folders' => []]]]]);
 
         $this->artisan('create:package users core');
 
@@ -31,7 +31,7 @@ class StructureFlexibilityTest extends TestCase
     /** @test */
     public function when_a_new_file_added_to_structure_it_will_be_created()
     {
-        config()->set('packagify.structures.package.src.Models.FILES', ['model' => 'Post.php']);
+        Settings::set('structures.package.src.Models.FILES', ['model' => 'Post.php']);
 
         $this->artisan('create:package users core');
 
