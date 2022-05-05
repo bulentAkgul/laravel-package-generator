@@ -1,3 +1,3 @@
 <?php
 
-return ['.ignore', 'prohibitives', 'seperators'];
+return ['.ignore'];
