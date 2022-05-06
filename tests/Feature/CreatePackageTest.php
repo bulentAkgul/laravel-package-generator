@@ -23,7 +23,7 @@ class CreatePackageTest extends TestCase
         $this->artisan('create:package users core');
 
         $this->assertFileDoesNotExist(base_path('src'));
-        $this->assertFileDoesNotExist(Path::base([Settings::main('packages_root'), 'core', 'users', 'src']));
+        $this->assertFileDoesNotExist(Path::base([Settings::folders('packages'), 'core', 'users', 'src']));
     }
 
     /** @test */
@@ -38,7 +38,7 @@ class CreatePackageTest extends TestCase
 
         $this->artisan('create:package users core');
 
-        $this->assertFileDoesNotExist(base_path(Settings::main('packages_root')));
+        $this->assertFileDoesNotExist(base_path(Settings::folders('packages')));
         $this->assertFileExists(Path::base(['src', 'MyTestPackage.php']));
 
         $content = file(Path::base(['src', 'MyTestPackageServiceProvider.php']));
@@ -58,7 +58,7 @@ class CreatePackageTest extends TestCase
 
         $this->artisan("create:package {$this->testPackage['name']} {$this->testPackage['folder']}");
 
-        $src = Path::base([Settings::main('packages_root'), $this->testPackage['folder'], $this->testPackage['name'], 'src']);
+        $src = Path::base([Settings::folders('packages'), $this->testPackage['folder'], $this->testPackage['name'], 'src']);
         
         $name = ucfirst(Str::singular($this->testPackage['name']));
 

@@ -46,7 +46,7 @@ class RequestService
         return Settings::standalone('package')
             ? $base
             : Path::glue(array_filter(
-                [$base, Settings::main('packages_root'), $root, $package]
+                [$base, Settings::folders('packages'), $root, $package]
             ));
     }
 

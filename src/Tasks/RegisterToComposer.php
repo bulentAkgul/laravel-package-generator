@@ -42,7 +42,7 @@ class RegisterToComposer
 
     private static function url()
     {
-        return Path::glue([Settings::main('packages_root'), self::$request['attr']['root'], self::$request['attr']['package']]);
+        return Path::glue([Settings::folders('packages'), self::$request['attr']['root'], self::$request['attr']['package']]);
     }
 
     private static function setRequirement()

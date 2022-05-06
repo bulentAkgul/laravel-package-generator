@@ -15,7 +15,7 @@ class StructureFlexibilityTest extends TestCase
 
         $this->artisan('create:package users core');
 
-        $this->assertFileExists(Path::base([Settings::main('packages_root'), 'core', 'users', 'src', 'Models']));
+        $this->assertFileExists(Path::base([Settings::folders('packages'), 'core', 'users', 'src', 'Models']));
     }
     
     /** @test */
@@ -25,7 +25,7 @@ class StructureFlexibilityTest extends TestCase
 
         $this->artisan('create:package users core');
 
-        $this->assertFileExists(Path::base([Settings::main('packages_root'), 'core', 'users', 'src', 'Models', 'Sub1', 'Sub2', 'Sub3', 'Folders']));
+        $this->assertFileExists(Path::base([Settings::folders('packages'), 'core', 'users', 'src', 'Models', 'Sub1', 'Sub2', 'Sub3', 'Folders']));
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class StructureFlexibilityTest extends TestCase
 
         $this->artisan('create:package users core');
 
-        $path = Path::base([Settings::main('packages_root'), 'core', 'users', 'src', 'Models', 'Post.php']);
+        $path = Path::base([Settings::folders('packages'), 'core', 'users', 'src', 'Models', 'Post.php']);
         
         $this->assertFileExists($path);
 
