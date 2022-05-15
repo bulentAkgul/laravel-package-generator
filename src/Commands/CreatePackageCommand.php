@@ -27,12 +27,12 @@ class CreatePackageCommand extends Command
         ],
         'root' => [
             "Require",
-            "It must be one of the defined roots in the 'roots' array on *config/packagify.php*"
+            "It must be one of the defined roots in the 'roots' array on 'config/packagify.php'"
         ],
     ];
     protected $options = [
         'dev' => [
-            "If you create a dev-dependency, add '-d' or '--dev' to the command. "
+            "If you create a dev-dependency, add '-d' or '--dev' to the command."
         ]
     ];
 
