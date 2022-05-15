@@ -17,7 +17,7 @@ sail artisan packagify:publish-config
 create:package {package} {root} {--d|dev}
 ```
 
-### Expected Inputs
+### Arguments and Options
 + **Package**: It's required and must be unique.
 
 + **Root**: It's required and must be one of the defined roots in the "**roots**" array on *config/packagify.php*
