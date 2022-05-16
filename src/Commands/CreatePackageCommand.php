@@ -50,7 +50,7 @@ class CreatePackageCommand extends Command
     {
         if (Settings::standalone('laravel')) $this->write('Laravel');
         
-        if (Settings::standalone('package') && $this->argument('name')) $this->write('Package');
+        if (Settings::standalone('package') && $this->argument('package')) $this->write('Package');
 
         $this->prepareRequest();
 
