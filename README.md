@@ -1,6 +1,6 @@
 # Laravel Package Generator
 
-This package aims to generate packages to increase productivity.
+This package aims to generate packages to increase productivity. It offers a flexible package structure tanks to settings that can be found in the **structures** array on *config/packagify.php*. The detailed explanations can be found in that array's comment block. 
 
 ### Installation
 
@@ -8,7 +8,7 @@ If you installed [**Packagified Laravel**](https://github.com/bulentAkgul/packag
 ```
 composer require bakgul/laravel-package-generator
 ```
-Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named **packagify.php** in the config folder. If you check the "**files**" array, you can see the file types that can be created. Quite deep explanations are provided in the comment block of the files array.
+Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named *config/packagify.php* in the config folder. If you check the "**files**" array, you can see the file types that can be created. Quite deep explanations are provided in the comment block of the files array.
 ```
 sail artisan packagify:publish-config
 ```
@@ -18,11 +18,11 @@ create:package {package} {root} {--d|dev}
 ```
 ### Arguments and Options
 
--   **Package**: It's required and must be unique.
+-   **package**: It's required and must be unique.
 
--   **Root**: It's required and must be one of the defined roots in the "**roots**" array on *config/packagify.php*
+-   **root**: It's required and must be one of the defined roots in the "**roots**" array on *config/packagify.php*
 
--   **Dev**: If you create a dev-dependency, add "**-d**" or "**--dev**" to the command.
+-   **dev**: If you create a dev-dependency, add "**-d**" or "**--dev**" to the command.
 
 ## Packagified Laravel
 
