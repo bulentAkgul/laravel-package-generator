@@ -43,6 +43,6 @@ class GetJsRequest
 
     private function types(string $type): array
     {
-        return [$type, Arry::get(Settings::resources($type), 'framework') ?? '', ''];
+        return [$type, Arry::get(Settings::resources($type) ?? [], 'framework') ?? '', ''];
     }
 }
