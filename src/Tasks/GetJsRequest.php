@@ -21,10 +21,21 @@ class GetJsRequest
 
     private function isNotRequired($app, $option): bool
     {
-        if ($option == 'route') return Prevented::route($app['router']);
-        if ($option == 'store') return Prevented::store($app['type']);
+        if ($option == 'route') return $this->isRouterNotRequired($app);
+        if ($option == 'store') return $this->isStoreNotRequired($app['type']);
 
         return true;
+    }
+
+    private function isRouterNotRequired($app)
+    {
+        return Prevented::route($app['router'], $app['type']);
+    }
+
+    private function isStoreNotRequired($type)
+    {
+        return Prevented::store($type)
+            || in_array(Settings::resources("{$type}.options.store"), ['pinia']);
     }
 
     private function service(array $app, string $option = ''): ?object
