@@ -13,7 +13,7 @@ If you installed [**Packagified Laravel**](https://github.com/bulentAkgul/packag
 composer require bakgul/laravel-package-generator
 ```
 
-Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named *config/packagify.php* in the config folder. If you check the "**files**" array, you can see the file types that can be created. Quite deep explanations are provided in the comment block of the files array.
+Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named *packagify.php* on the config folder. If you check the "**files**" array, you can see the file types that can be created. Quite deep explanations are provided in the comment block of the files array.
 
 ```
 sail artisan packagify:publish-config
