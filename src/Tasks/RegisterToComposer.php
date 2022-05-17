@@ -2,6 +2,7 @@
 
 namespace Bakgul\PackageGenerator\Tasks;
 
+use Bakgul\FileContent\Helpers\Content;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
 
@@ -59,9 +60,6 @@ class RegisterToComposer
 
     private static function setComposer()
     {
-        file_put_contents(
-            base_path('composer.json'),
-            str_replace('\/', '/', json_encode(self::$composer, JSON_PRETTY_PRINT))
-        );
+        Content::writeJson(base_path('composer.json'), self::$composer);
     }
 }
