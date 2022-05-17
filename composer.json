@@ -1,6 +1,6 @@
 {
   "name": "bakgul/laravel-package-generator",
-  "description": "Create standalone packages or packages as a part of Laravel repository.",
+  "description": "This package aims to generate packages to increase productivity. It offers a flexible package structure thanks to settings that can be found in the 'structures' array on 'config/packagify.php'. The detailed explanations can be found in that array's comment block.",
   "authors": [
     {
       "name": "Bulent Akgul",

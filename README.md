@@ -1,6 +1,6 @@
 # Laravel Package Generator
 
-This package aims to generate packages to increase productivity. It offers a flexible package structure tanks to settings that can be found in the **structures** array on *config/packagify.php*. The detailed explanations can be found in that array's comment block.
+This package aims to generate packages to increase productivity. It offers a flexible package structure thanks to settings that can be found in the **structures** array on *config/packagify.php*. The detailed explanations can be found in that array's comment block.
 
 #### DISCLAIMER
 
