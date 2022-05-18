@@ -2,6 +2,7 @@
 
 namespace Bakgul\PackageGenerator\Services;
 
+use Bakgul\Kernel\Helpers\Package;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Helpers\Text;
@@ -99,13 +100,12 @@ class RequestService
     {
         if ($request['attr']['base_path'] == $path || array_reverse(explode('.', $file))[0] != 'php') return '';
 
-        return $request['map']['root_namespace']
-            . Text::append(Path::toNamespace(trim(
-                str_replace([$request['attr']['base_path'], DIRECTORY_SEPARATOR . 'src'], '', $path),
-                DIRECTORY_SEPARATOR
-            )), '\\');
+         return implode('\\', [
+             $request['map']['root_namespace'],
+             Path::toNamespace(str_replace([$request['attr']['path'], DIRECTORY_SEPARATOR . 'src'], '', $path))
+         ]);
     }
-
+    
     protected function makePath(array $request): string
     {
         return Text::replaceByMap($request['map'], $request['attr']['path'], true, DIRECTORY_SEPARATOR);
