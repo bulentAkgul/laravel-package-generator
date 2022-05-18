@@ -33,6 +33,10 @@ create:package {package} {root} {--d|dev}
 
 -   **dev**: If you create a dev-dependency, add "**-d**" or "**--dev**" to the command.
 
+## Credit
+
+I copied the service provider's boilerplate from the package generated on [**BeyondCode Boilerplate Generator**](https://laravelpackageboilerplate.com/)
+
 ## Packagified Laravel
 
 The main package that includes this one can be found here: [**Packagified Laravel**](https://github.com/bulentAkgul/packagified-laravel)
