@@ -8,6 +8,6 @@ class PackageSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->run(array_map(fn ($seeder) => $seeder::class, config('{{ registrar }}.seeders')));
+        $this->run(array_map(fn ($seeder) => $seeder::class, config('{{ identity }}{{ registrar }}.seeders')));
     }
 }

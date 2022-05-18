@@ -71,7 +71,7 @@ class CreatePackageTest extends TestCase
         );
         
         $this->assertTrue(str_contains(
-            $content[52], Path::glue(['', '..', 'config', "{$this->testPackage['name']}.php"]) . "', '{$this->testPackage['name']}'"
+            $content[52], Path::glue(['', '..', 'config', "{$this->testPackage['name']}.php"]) . "', '" . Settings::identity('registrar') . ".{$this->testPackage['name']}'"
         ));
     }
 }

@@ -21,7 +21,7 @@ class {{ Package }}ServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/{{ registrar }}.php' => config_path('{{ registrar }}.php'),
+                __DIR__.'/../config/{{ registrar }}.php' => config_path('{{ identity }}{{ registrar }}.php'),
             ], 'config');
 
             // Publishing the views.
