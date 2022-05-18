@@ -55,10 +55,16 @@ class RequestService
         return [
             'package' => $p = ConvertCase::kebab($attr['package']),
             'Package' => ConvertCase::pascal($attr['package']),
+            'identity' => $this->serIdentity(),
             'registrar' => $this->setRegistrar($p),
             'root_namespace' => $rn = GenerateNamespace::_($attr),
             'composer_namespace' => str_replace('\\', '\\\\', $rn)
         ];
+    }
+
+    private function serIdentity()
+    {
+        return Settings::standalone() ? '' : Settings::identity('registrar') . '.';
     }
     
     private function setRegistrar($package)
