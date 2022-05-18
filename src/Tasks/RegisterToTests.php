@@ -71,7 +71,7 @@ class RegisterToTests
         return str_repeat(' ', 12)
             .'<directory suffix="Test.php">./'
             . Settings::folders('packages')
-            . "/{$attr['root']}/{$attr['package']}/{$suite}</directory>";
+            . "/{$attr['root']}/{$attr['package']}/tests/{$suite}</directory>";
     }
 
     private static function replaceLines($start, $end)
