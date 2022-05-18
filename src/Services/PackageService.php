@@ -5,6 +5,7 @@ namespace Bakgul\PackageGenerator\Services;
 use Bakgul\Kernel\Tasks\CompleteFolders;
 use Bakgul\PackageGenerator\Tasks\BuildPackageStructure;
 use Bakgul\PackageGenerator\Tasks\RegisterToComposer;
+use Bakgul\PackageGenerator\Tasks\RegisterToTests;
 
 class PackageService
 {
@@ -19,5 +20,7 @@ class PackageService
         OptionalFilesService::create($request);
 
         RegisterToComposer::_($request);
+
+        RegisterToTests::_($request['attr']);
     }
 }
