@@ -11,7 +11,9 @@
   "require-dev": {},
   "autoload": {
     "psr-4": {
-      "{{ composer_namespace }}\\": "src/"
+      "{{ composer_namespace }}\\": "src/",
+      "{{ composer_namespace }}\\Database\\Seeders\\": "database/seeders",
+      "{{ composer_namespace }}\\Database\\Factories\\": "database/factories"
     }
   },
   "autoload-dev": {
