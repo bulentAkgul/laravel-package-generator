@@ -12,14 +12,13 @@
   "autoload": {
     "psr-4": {
       "{{ composer_namespace }}\\": "src/",
-      "{{ composer_namespace }}\\Database\\Seeders\\": "database/seeders",
-      "{{ composer_namespace }}\\Database\\Factories\\": "database/factories"
+      "{{ composer_namespace }}\\Database\\Seeders\\": "database/seeders/",
+      "{{ composer_namespace }}\\Database\\Factories\\": "database/factories/",
+      "{{ composer_namespace }}\\Tests\\": "tests/"
     }
   },
   "autoload-dev": {
-      "psr-4": {
-          "{{ composer_namespace }}\\Tests\\": "tests/"
-      }
+      "psr-4": {}
   },
   "extra": {
     "laravel": {
