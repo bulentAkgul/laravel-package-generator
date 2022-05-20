@@ -57,9 +57,10 @@ class RequestService
             'package' => $p = ConvertCase::kebab($attr['package']),
             'Package' => ConvertCase::pascal($attr['package']),
             'identity' => $this->serIdentity(),
-            'registrar' => $this->setRegistrar($p),
+            'registrar' => $r = $this->setRegistrar($p),
             'root_namespace' => $rn = GenerateNamespace::_($attr),
-            'composer_namespace' => str_replace('\\', '\\\\', $rn)
+            'composer_namespace' => str_replace('\\', '\\\\', $rn),
+            'loadable_views' => $this->setLoadableViews($r),
         ];
     }
 
@@ -71,6 +72,14 @@ class RequestService
     private function setRegistrar($package)
     {
         return Settings::standalone() ? $this->map['registrar'] : $package;
+    }
+
+    private function setLoadableViews(string $registrar)
+    {
+        return implode(PHP_EOL . str_repeat(' ', 8), array_map(
+            fn ($x) => '// $this->loadViewsFrom(__DIR__.' . "'/../resources/clients/{$x['folder']}/views', '{$registrar}');",
+            Settings::apps(callback: fn ($x) => $x['type'] == 'blade')
+        ));
     }
 
     public function modify($request, $stub, $file, $path)

@@ -30,7 +30,7 @@ class CreatePackageTest extends TestCase
     public function package_will_be_created_on_the_base_when_standalone_package_is_true()
     {
         $this->testPackage = (new SetupTest)(TestDataService::standalone('sp'));
-        
+
         Settings::set('identity.package', 'my test package');
         Settings::set('identity.registrar', 'register-with-me');
 
@@ -42,12 +42,14 @@ class CreatePackageTest extends TestCase
         $this->assertFileExists(Path::base(['src', 'MyTestPackage.php']));
 
         $content = file(Path::base(['src', 'MyTestPackageServiceProvider.php']));
-        
+
         $this->assertEquals(
-            trim($content[2]), 'namespace ' . Settings::identity('namespace') . ';'
+            trim($content[2]),
+            'namespace ' . Settings::identity('namespace') . ';'
         );
         $this->assertTrue(str_contains(
-            $content[52], Path::glue(['', '..', 'config', "register-with-me.php'"]) . ", 'register-with-me'"
+            $content[52],
+            Path::glue(['', '..', 'config', "register-with-me.php'"]) . ", 'register-with-me'"
         ));
     }
 
@@ -59,19 +61,38 @@ class CreatePackageTest extends TestCase
         $this->artisan("create:package {$this->testPackage['name']} {$this->testPackage['folder']}");
 
         $src = Path::base([Settings::folders('packages'), $this->testPackage['folder'], $this->testPackage['name'], 'src']);
-        
+
         $name = ucfirst(Str::singular($this->testPackage['name']));
 
         $this->assertFileExists(Path::glue([$src, "{$name}.php"]));
-        
+
         $content = file(Path::glue([$src, "{$name}ServiceProvider.php"]));
 
         $this->assertEquals(
-            trim($content[2]), "namespace {$this->testPackage['namespace']}\\{$name};"
+            trim($content[2]),
+            "namespace {$this->testPackage['namespace']}\\{$name};"
         );
-        
-        $this->assertTrue(str_contains(
-            $content[52], Path::glue(['', '..', 'config', "{$this->testPackage['name']}.php"]) . "', '" . Settings::identity('registrar') . ".{$this->testPackage['name']}'"
-        ));
+
+        $bladeApps = array_values(Settings::apps(callback: fn ($x) => $x['type'] == 'blade'));
+
+        if ($bladeApps) {
+            $this->assertEquals(
+                '// $this->loadViewsFrom(__DIR__.' . "'/../resources/clients/{$bladeApps[0]['folder']}/views', '{$this->testPackage['name']}');",
+                trim($content[10])
+            );
+        }
+
+        $this->assertEquals(
+            '$this->mergeConfigFrom(__DIR__.' . "'/../config/{$this->testPackage['name']}.php', '{$this->configKeys('pl')}');",
+            trim($content[18 + count($bladeApps)])
+        );
+    }
+
+    private function configKeys($scenario)
+    {
+        return match($scenario) {
+            'pl' => Settings::identity('registrar') . '.' . $this->testPackage['name'],
+            default => Settings::identity('registrar')
+        };
     }
 }
