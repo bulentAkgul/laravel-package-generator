@@ -13,7 +13,7 @@ class BladeRequestService extends RequestService
         $request['attr']['file'] = "page.blade.php";
         $request['attr']['stub'] = "blade.stub";
 
-        $request['map']['extends'] = Settings::standalone('package') ? '' : "layouts.{$request['attr']['folder']}";
+        $request['map']['extends'] = Settings::standalone('package') ? '' : $request['attr']['folder'];
 
         return $request;
     }
