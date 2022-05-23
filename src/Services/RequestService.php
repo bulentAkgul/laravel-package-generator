@@ -60,7 +60,8 @@ class RequestService
             'registrar' => $r = $this->setRegistrar($p),
             'root_namespace' => $rn = GenerateNamespace::_($attr),
             'composer_namespace' => str_replace('\\', '\\\\', $rn),
-            'loadable_views' => $this->setLoadableViews($r),
+            'apps' => Settings::folders('apps'),
+            'package_views' => $this->setPackageViews($r),
         ];
     }
 
@@ -72,14 +73,6 @@ class RequestService
     private function setRegistrar($package)
     {
         return Settings::standalone() ? $this->map['registrar'] : $package;
-    }
-
-    private function setLoadableViews(string $registrar)
-    {
-        return implode(PHP_EOL . str_repeat(' ', 8), array_map(
-            fn ($x) => '// $this->loadViewsFrom(__DIR__.' . "'/../resources/clients/{$x['folder']}/views', '{$registrar}');",
-            Settings::apps(callback: fn ($x) => $x['type'] == 'blade')
-        ));
     }
 
     public function modify($request, $stub, $file, $path)
@@ -118,5 +111,30 @@ class RequestService
     protected function makePath(array $request): string
     {
         return Text::replaceByMap($request['map'], $request['attr']['path'], true, DIRECTORY_SEPARATOR);
+    }
+    
+    private function setPackageViews($registrar)
+    {
+        $sp = Settings::standalone('package');
+        $view = Settings::folders('view');
+
+        $views = [];
+
+        foreach (Settings::apps(callback: fn ($x) => $x['medium'] == 'browser') as $app) {
+            $views[] = $sp
+                ? '__DIR__.' . "'/../resources/{$app['folder']}/{$view}' => resource_path('views/{$registrar}'),"
+                : '$this->loadViewsFrom(__DIR__.' . "'/../resources/{$app['folder']}/{$view}', '$registrar');";
+        }
+
+        $views = array_map(fn ($x) => str_repeat(' ', $sp ? 12 : 8) . $x, $views);
+
+        if ($sp) {
+            array_splice($views, 0, 0, '$this->publishes([');
+            $views[] = str_repeat(' ', 8) . ']);';
+        } else {
+            $views[0] = trim($views[0]);
+        }
+
+        return implode(PHP_EOL, $views);
     }
 }
