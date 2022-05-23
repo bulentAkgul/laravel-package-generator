@@ -8,7 +8,7 @@ class {{ Package }}ServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        {{ loadable_views }}
+        {{ package_views }}
         // $this->loadTranslationsFrom(__DIR__.'/../lang', '{{ registrar }}');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes/api.php');
