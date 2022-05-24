@@ -5,9 +5,11 @@ namespace Bakgul\PackageGenerator\Services;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\FileContent\Functions\MakeFile;
+use Bakgul\Kernel\Helpers\Text;
 use Bakgul\PackageGenerator\Tasks\GetBladeRequest;
 use Bakgul\PackageGenerator\Tasks\GetCssRequest;
 use Bakgul\PackageGenerator\Tasks\GetJsRequest;
+use Bakgul\ResourceCreator\Tasks\SetRelativePath;
 use Illuminate\Filesystem\Filesystem;
 
 class OptionalFilesService
@@ -23,7 +25,7 @@ class OptionalFilesService
     {
         if (Settings::resources() == null) return;
 
-        $request['attr']['path'] .= DIRECTORY_SEPARATOR . 'resources'; 
+        $request['attr']['path'] .= DIRECTORY_SEPARATOR . 'resources';
 
         foreach (Settings::apps() as $app) {
             self::createJs($request, $app);
@@ -45,7 +47,22 @@ class OptionalFilesService
     {
         $fileRequest = (new GetCssRequest)($request, $app);
 
-        if ($fileRequest) MakeFile::_($fileRequest);
+        if ($fileRequest) {
+            MakeFile::_($fileRequest);
+
+            self::registerCss($fileRequest);
+        }
+    }
+
+    private static function registerCss($request)
+    {
+        $from = ['resources', Settings::folders('apps'), $request['attr']['folder'], $request['map']['container']];
+
+        $file = base_path(Path::glue([...$from, str_replace('_index', $request['attr']['folder'], $request['attr']['file'])]));
+
+        if (!file_exists($file)) return;
+
+        file_put_contents($file, "\n@use " . Text::wrap(SetRelativePath::_($file, $request['attr']['path']), 'dq') . ";", FILE_APPEND);
     }
 
     private static function createView(array $request, array $app)

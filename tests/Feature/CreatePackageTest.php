@@ -6,6 +6,7 @@ use Bakgul\Kernel\Tests\Concerns\HasTestMethods;
 use Bakgul\Kernel\Helpers\Folder;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
+use Bakgul\Kernel\Tasks\CompleteFolders;
 use Bakgul\Kernel\Tests\Services\TestDataService;
 use Bakgul\Kernel\Tests\Tasks\SetupTest;
 use Bakgul\Kernel\Tests\TestCase;
@@ -56,7 +57,19 @@ class CreatePackageTest extends TestCase
     /** @test */
     public function package_will_be_created_on_the_root_when_standalone_is_false()
     {
+        ray()->clearAll();
+
         $this->testPackage = (new SetupTest)(TestDataService::standalone('pl'), true);
+
+        $path = base_path('resources/clients');
+
+        foreach (Settings::apps() as $app) {
+            $x = "{$path}/{$app['folder']}/styles";
+            
+            CompleteFolders::_($x, false);
+            
+            file_put_contents("{$x}/{$app['folder']}.scss", '');            
+        }
 
         $this->artisan("create:package {$this->testPackage['name']} {$this->testPackage['folder']}");
 
