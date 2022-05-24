@@ -5,6 +5,8 @@ namespace Bakgul\PackageGenerator\Services;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\FileContent\Functions\MakeFile;
+use Bakgul\FileContent\Helpers\Content;
+use Bakgul\FileContent\Tasks\WriteToFile;
 use Bakgul\Kernel\Helpers\Text;
 use Bakgul\PackageGenerator\Tasks\GetBladeRequest;
 use Bakgul\PackageGenerator\Tasks\GetCssRequest;
@@ -62,12 +64,15 @@ class OptionalFilesService
 
         if (!file_exists($file)) return;
 
-        file_put_contents($file, "\n@use " . Text::wrap(SetRelativePath::_($file, $request['attr']['path']), 'dq') . ";", FILE_APPEND);
+        $content = Content::read($file);
+        $line = "@use " . Text::wrap(SetRelativePath::_($file, $request['attr']['path']), 'dq') . ";";
+
+        WriteToFile::_([...$content, $line], $file);
     }
 
     private static function createView(array $request, array $app)
     {
-        if ($app['type'] != 'blade') return;
+        if ($app['type'] != 'blade' || !Settings::resources('blade.options.class')) return;
 
         $fileRequest = (new GetBladeRequest)($request, $app);
 
