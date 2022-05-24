@@ -48,4 +48,11 @@ return [
             'Unit' => [],
         ]
     ],
+    'resources' => [
+        'sass' => [
+            'abstractions' => ['properties', 'variables', 'functions', 'mixins'],
+            'utilities' => ['box-model', 'color', 'decorator', 'typrography', 'item', '_index'],
+            'components' => ['_index'],
+        ]
+    ]
 ];
