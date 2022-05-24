@@ -25,7 +25,7 @@ return [
     | 
     */
     'package' => [
-        'FILES' => ['composer' => 'composer.json', 'readme' => 'README.md'],
+        'FILES' => ['composer' => 'composer.json'],
         'config' => ['FILES' => ['config' => '{{ registrar }}.php']],
         'database' => ['factories' => [], 'migrations' => [], 'seeders' => [
             'FILES' => ['seeder' => 'PackageSeeder.php']
@@ -37,6 +37,7 @@ return [
                 ]
             ]
         ],
+        'routes' => ['FILES' => ['route.web' => 'web.php', 'route.api' => 'api.php']],
         'src' => ['FILES' => [
             'class' => '{{ Package }}.php',
             'facade' => '{{ Package }}Facade.php',
