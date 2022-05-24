@@ -57,8 +57,6 @@ class CreatePackageTest extends TestCase
     /** @test */
     public function package_will_be_created_on_the_root_when_standalone_is_false()
     {
-        ray()->clearAll();
-
         $this->testPackage = (new SetupTest)(TestDataService::standalone('pl'), true);
 
         $path = base_path('resources/clients');
