@@ -62,6 +62,7 @@ class RequestService
             'composer_namespace' => str_replace('\\', '\\\\', $rn),
             'apps' => Settings::folders('apps'),
             'package_views' => $this->setPackageViews($r),
+            'auth' => Settings::main('auth')
         ];
     }
 
