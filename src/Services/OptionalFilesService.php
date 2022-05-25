@@ -8,6 +8,7 @@ use Bakgul\FileContent\Functions\MakeFile;
 use Bakgul\FileContent\Helpers\Content;
 use Bakgul\FileContent\Tasks\WriteToFile;
 use Bakgul\Kernel\Helpers\Text;
+use Bakgul\Kernel\Tasks\SimulateArtisanCall;
 use Bakgul\PackageGenerator\Tasks\GetBladeRequest;
 use Bakgul\PackageGenerator\Tasks\GetCssRequest;
 use Bakgul\PackageGenerator\Tasks\GetJsRequest;
@@ -41,7 +42,7 @@ class OptionalFilesService
         foreach (['route', 'store'] as $option) {
             $fileRequest = (new GetJsRequest)($request, $app, $option);
 
-            if ($fileRequest) MakeFile::_($fileRequest);
+            if ($fileRequest) (new SimulateArtisanCall)($fileRequest, 'resource');
         }
     }
 
@@ -72,7 +73,7 @@ class OptionalFilesService
 
     private static function createView(array $request, array $app)
     {
-        if ($app['type'] != 'blade' || !Settings::resources('blade.options.class')) return;
+        if ($app['type'] != 'blade' || Settings::resources('blade.options.class')) return;
 
         $fileRequest = (new GetBladeRequest)($request, $app);
 
