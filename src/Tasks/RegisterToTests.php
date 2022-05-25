@@ -2,7 +2,7 @@
 
 namespace Bakgul\PackageGenerator\Tasks;
 
-use Bakgul\FileContent\Helpers\Content;
+use Bakgul\FileContent\Tasks\WriteToFile;
 use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\Kernel\Helpers\Settings;
 
@@ -31,7 +31,7 @@ class RegisterToTests
             self::replaceLines($start, $end);
         }
 
-        Content::write(base_path('phpunit.xml'), self::$content);
+        WriteToFile::_(self::$content, base_path('phpunit.xml'));
     }
 
     private static function getContent()
