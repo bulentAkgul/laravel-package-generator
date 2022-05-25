@@ -10,6 +10,7 @@ use Bakgul\Kernel\Tasks\CompleteFolders;
 use Bakgul\Kernel\Tests\Services\TestDataService;
 use Bakgul\Kernel\Tests\Tasks\SetupTest;
 use Bakgul\Kernel\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class CreatePackageTest extends TestCase
@@ -57,17 +58,11 @@ class CreatePackageTest extends TestCase
     /** @test */
     public function package_will_be_created_on_the_root_when_standalone_is_false()
     {
-        $this->testPackage = (new SetupTest)(TestDataService::standalone('pl'), true);
+        Settings::set('resources.vue.options.store', 'vuex');
 
-        $path = base_path('resources/clients');
+        $this->testPackage = (new SetupTest)(TestDataService::standalone('pl'));
 
-        foreach (Settings::apps() as $app) {
-            $x = "{$path}/{$app['folder']}/styles";
-            
-            CompleteFolders::_($x, false);
-            
-            file_put_contents("{$x}/{$app['folder']}.scss", '');            
-        }
+        (new Filesystem)->deleteDirectory($this->testPackage['path']);
 
         $this->artisan("create:package {$this->testPackage['name']} {$this->testPackage['folder']}");
 
