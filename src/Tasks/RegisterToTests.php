@@ -2,6 +2,7 @@
 
 namespace Bakgul\PackageGenerator\Tasks;
 
+use Bakgul\FileContent\Helpers\Content;
 use Bakgul\FileContent\Tasks\WriteToFile;
 use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\Kernel\Helpers\Settings;
@@ -36,10 +37,7 @@ class RegisterToTests
 
     private static function getContent()
     {
-        self::$content = array_map(
-            fn ($x) => trim($x, PHP_EOL),
-            file(base_path('phpunit.xml'))
-        );
+        self::$content = Content::read(base_path('phpunit.xml'), purify: false);
     }
 
     public static function findLimits($suite)
@@ -71,7 +69,8 @@ class RegisterToTests
         return str_repeat(' ', 12)
             .'<directory suffix="Test.php">./'
             . Settings::folders('packages')
-            . "/{$attr['root']}/{$attr['package']}/tests/{$suite}</directory>";
+            . "/{$attr['root']}/{$attr['package']}/tests/{$suite}</directory>"
+            . PHP_EOL;
     }
 
     private static function replaceLines($start, $end)
