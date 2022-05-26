@@ -124,7 +124,7 @@ class RequestService
         foreach (Settings::apps(callback: fn ($x) => $x['medium'] == 'browser') as $app) {
             $views[] = $sp
                 ? '__DIR__.' . "'/../resources/{$app['folder']}/{$view}' => resource_path('views/{$registrar}'),"
-                : '$this->loadViewsFrom(__DIR__.' . "'/../resources/{$app['folder']}/{$view}', '$registrar');";
+                : '$this->loadViewsFrom(__DIR__.' . "'/../resources" . Text::wrap(Settings::folders('apps'), '/') . "{$app['folder']}/{$view}', '$registrar');";
         }
 
         $views = array_map(fn ($x) => str_repeat(' ', $sp ? 12 : 8) . $x, $views);
