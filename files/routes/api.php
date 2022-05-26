@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::apiResources([]);
+Route::prefix('api')->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::apiResources([]);
+    });
 });
