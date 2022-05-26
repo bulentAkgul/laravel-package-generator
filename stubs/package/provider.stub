@@ -10,9 +10,9 @@ class {{ Package }}ServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        {{ package_views }}
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadTranslationsFrom(__DIR__.'/../lang', '{{ registrar }}');
+        {{ package_views }}
     }
 
     public function register()
