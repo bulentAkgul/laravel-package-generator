@@ -27,9 +27,7 @@ return [
     'package' => [
         'FILES' => ['composer' => 'composer.json'],
         'config' => ['FILES' => ['config' => '{{ registrar }}.php']],
-        'database' => ['factories' => [], 'migrations' => [], 'seeders' => [
-            'FILES' => ['seeder' => 'PackageSeeder.php']
-        ]],
+        'database' => ['factories' => [], 'migrations' => [], 'seeders' => []],
         'resources' => [
             '{{ apps }}' => [
                 '{{ app }}' => [
