@@ -1,9 +1,2 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
-Route::prefix('api')->group(function () {
-    Route::middleware(['api', 'auth{{ auth }}'])->group(function () {
-        Route::apiResources([]);
-    });
-});
