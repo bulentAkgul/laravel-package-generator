@@ -37,7 +37,7 @@ class AddApiRoutes
 
     private static $skeleton = [
         'Route::prefix(' . "'api{{ app }}'" . ')->group(function () {',
-        '    Route::middleware([' . "{{admin_mv}}'api', 'auth{{ auth }}'" . '])->group(function () {',
+        '    Route::middleware([' . "{{ admin_mv }}'api', 'auth{{ auth }}'" . '])->group(function () {',
         '        Route::apiResources([]);',
         '    });',
         '});'
