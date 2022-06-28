@@ -2,4 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::resources([]);
+Route::prefix('')->group(function () {
+    Route::middleware(['web'])->group(function () {
+        Route::resources([]);
+    });
+});
